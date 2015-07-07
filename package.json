@@ -1,10 +1,9 @@
 {
   "name": "coffee-preview",
   "main": "./lib/main",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "CoffeeScript Preview for Atom",
-  "keywords": [
-  ],
+  "keywords": [],
   "activationCommands": {
     "atom-text-editor[data-grammar~='coffee']": [
       "coffee-preview:toggle"
