@@ -1,0 +1,22 @@
+{
+  "name": "coffee-preview",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "CoffeeScript Preview for Atom",
+  "keywords": [
+  ],
+  "activationCommands": {
+    "atom-text-editor[data-grammar~='coffee']": [
+      "coffee-preview:toggle"
+    ]
+  },
+  "repository": "https://github.com/aki77/atom-coffee-preview",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "coffee-script": "^1.9.3",
+    "underscore": "^1.8.3"
+  }
+}
