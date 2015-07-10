@@ -2,23 +2,31 @@
   "name": "coffee-preview",
   "main": "./lib/main",
   "version": "0.1.1",
-  "description": "CoffeeScript Preview for Atom",
+  "description": "Source Preview for Atom",
   "keywords": [
     "coffeescript",
     "preview"
   ],
   "activationCommands": {
-    "atom-text-editor[data-grammar~='coffee']": [
-      "coffee-preview:toggle"
+    "atom-text-editor[data-grammar~='source']": [
+      "source-preview:toggle"
     ]
   },
-  "repository": "https://github.com/aki77/atom-coffee-preview",
+  "repository": "https://github.com/aki77/atom-source-preview",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
     "coffee-script": "^1.9.3",
+    "source-map": "^0.4.3",
     "underscore": "^1.8.3"
+  },
+  "consumedServices": {
+    "preview.provider": {
+      "versions": {
+        "0.1.0": "consumeProvider"
+      }
+    }
   }
 }

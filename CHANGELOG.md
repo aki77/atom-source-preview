@@ -1,3 +1,7 @@
+## 0.2.0
+* Renaming coffee-preview to source-preview
+* Support services api
+
 ## 0.1.1
 * Add build status
 

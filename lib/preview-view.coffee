@@ -1,20 +1,22 @@
-coffee = require 'coffee-script'
 _ = require 'underscore'
+{SourceMapConsumer} = require 'source-map'
 {CompositeDisposable, TextEditor} = require 'atom'
 
 module.exports =
 class PreviewView
   alive: true
 
-  constructor: (@editor) ->
+  constructor: (@editor, @provider) ->
     @previewEditor = new TextEditor
-    @previewEditor.setGrammar(atom.grammars.grammarForScopeName('source.js'))
-    @previewEditor.getTitle = -> 'Coffee Preview'
+    grammar = atom.grammars.grammarForScopeName(@provider.toScopeName)
+    @previewEditor.setGrammar(grammar) if grammar
+    @previewEditor.getTitle = -> 'Source Preview'
 
-    atom.config.observe('coffee-preview.refreshDebouncePeriod', (wait) =>
+    @subscriptions = new CompositeDisposable
+    @subscriptions.add(atom.config.observe('source-preview.RefreshDebouncePeriod', (wait) =>
       @debouncedRenderPreview = _.debounce(@renderPreview, wait)
-    )
-    @debouncedSyncScroll = _.debounce(@syncScroll, 100)
+    ))
+    @debouncedSyncScroll = _.debounce(@syncScroll, 200)
 
     @handleEvents()
     @renderPreview()
@@ -29,6 +31,8 @@ class PreviewView
     @previewEditor?.destroy()
     @previewEditor = null
     @sourceMap = null
+    @editor = null
+    @provider = null
     @subscriptions?.dispose()
     @subscriptions = null
 
@@ -36,7 +40,6 @@ class PreviewView
     @alive
 
   handleEvents: ->
-    @subscriptions = new CompositeDisposable
     @subscriptions.add(@editor.onDidStopChanging(@changeHandler))
     @subscriptions.add(@editor.onDidChangeCursorPosition(@changePositionHandler))
     @subscriptions.add(@editor.onDidDestroy(@destroy))
@@ -47,35 +50,46 @@ class PreviewView
     @debouncedRenderPreview()
 
   changePositionHandler: ({oldBufferPosition, newBufferPosition}) =>
-    unless oldBufferPosition.row is newBufferPosition.row
-      @debouncedSyncScroll()
+    @debouncedSyncScroll()
 
   changeItemHandler: (item) =>
     @destroy() unless item in [@editor, @previewEditor]
 
   syncScroll: =>
+    return unless atom.config.get('source-preview.enableSyncScroll')
+
     bufferRow = @editor.getCursorBufferPosition().row
-    for line in @sourceMap.lines.slice().reverse()
-      continue unless line?
-      for column in line.columns.slice().reverse()
-        continue unless column?
-        if column.sourceLine is bufferRow
-          @previewEditor.setCursorBufferPosition([column.line, 0])
-          @previewEditor.clearSelections()
-          @previewEditor.selectLinesContainingCursors()
-          @recenterTopBottom(@previewEditor)
-          return
+    previewRow = @generatedRowFor()
+    return unless previewRow?
+
+    @previewEditor.setCursorBufferPosition([previewRow, 0])
+    @previewEditor.clearSelections()
+    @previewEditor.selectLinesContainingCursors()
+    @recenterTopBottom(@previewEditor)
+
+  generatedRowFor: ->
+    return unless @sourceMap?
+    pos = @editor.getCursorBufferPosition()
+    {line} = @sourceMap.generatedPositionFor(
+      source: @sourceMap.sources[0]
+      line: pos.row + 1
+      column: pos.column + 1
+    )
+    line - 1
 
   renderPreview: =>
     @errorNotification?.dismiss()
     @errorNotification = null
 
     try
-      {js, @sourceMap} = coffee.compile(@editor.getText(), sourceMap: true)
-      @previewEditor.setText(js)
+      options =
+        sourceMap: atom.config.get('source-preview.enableSyncScroll')
+      {code, sourceMap} = @provider.transform(@editor.getText(), options)
+      @previewEditor.setText(code)
+      @sourceMap = new SourceMapConsumer(sourceMap) if sourceMap
       @debouncedSyncScroll()
     catch error
-      @errorNotification = atom.notifications.addError('CoffeeScript compile error', {
+      @errorNotification = atom.notifications.addError('source-preview compile error', {
         dismissable: true
         detail: error.toString()
       })
@@ -87,7 +101,7 @@ class PreviewView
     editorPane.activate()
 
     editorElement = atom.views.getView(@previewEditor)
-    atom.commands.add(editorElement, 'coffee-preview:toggle', @destroy)
+    atom.commands.add(editorElement, 'source-preview:toggle', @destroy)
 
   recenterTopBottom: (editor) ->
     editorElement = atom.views.getView(editor)

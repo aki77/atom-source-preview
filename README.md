@@ -1,7 +1,7 @@
-# coffee-preview package
+# source-preview package
 
-CoffeeScript Preview for Atom.
-[![Build Status](https://travis-ci.org/aki77/atom-coffee-preview.svg)](https://travis-ci.org/aki77/atom-coffee-preview)
+Source Preview for Atom.
+[![Build Status](https://travis-ci.org/aki77/atom-source-preview.svg)](https://travis-ci.org/aki77/atom-source-preview)
 
 [![Gyazo](http://i.gyazo.com/01dc7a053c5a62cc3caa352a9ab35ee4.gif)](http://gyazo.com/01dc7a053c5a62cc3caa352a9ab35ee4)
 
@@ -11,9 +11,18 @@ CoffeeScript Preview for Atom.
 * Shows error messages
 * Synchronize cursor
 
+## Supported Languages
+
+* CoffeeScript
+* React(JSX): [source-preview-react](https://atom.io/packages/source-preview-react)
+
 ## Commands
 
-* `coffee-preview:toggle`
+* `source-preview:toggle`
+
+## Settings
+
+* `enableBuiltinProvider` (default: true)
 
 ## Keymap
 
@@ -22,6 +31,6 @@ No keymap by default.
 edit `~/.atom/keymap.cson`
 
 ```coffeescript
-'atom-text-editor[data-grammar~="coffee"]':
-  'ctrl-M': 'coffee-preview:toggle'
+'atom-text-editor[data-grammar~="source"]':
+  'ctrl-M': 'source-preview:toggle'
 ```
