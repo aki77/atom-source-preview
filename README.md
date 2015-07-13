@@ -3,7 +3,7 @@
 Source Preview for Atom.
 [![Build Status](https://travis-ci.org/aki77/atom-source-preview.svg)](https://travis-ci.org/aki77/atom-source-preview)
 
-[![Gyazo](http://i.gyazo.com/01dc7a053c5a62cc3caa352a9ab35ee4.gif)](http://gyazo.com/01dc7a053c5a62cc3caa352a9ab35ee4)
+[![Gyazo](http://i.gyazo.com/e391eb2802466ffa86111577052d02b7.gif)](http://gyazo.com/e391eb2802466ffa86111577052d02b7)
 
 ## Features
 
