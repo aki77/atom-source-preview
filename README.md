@@ -15,6 +15,7 @@ Source Preview for Atom.
 
 * CoffeeScript
 * React(JSX): [source-preview-react](https://atom.io/packages/source-preview-react)
+* React(CJSX): [source-preview-react](https://atom.io/packages/source-preview-react)
 
 ## Commands
 
