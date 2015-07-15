@@ -1,3 +1,7 @@
+## 0.2.1
+* Update README
+* Refactor
+
 ## 0.2.0
 * Renaming coffee-preview to source-preview
 * Support services api
