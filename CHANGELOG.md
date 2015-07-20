@@ -1,3 +1,6 @@
+## 0.2.2
+* Add filePath options
+
 ## 0.2.1
 * Update README
 * Refactor
