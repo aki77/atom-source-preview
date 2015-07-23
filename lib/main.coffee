@@ -42,8 +42,7 @@ module.exports =
       @view.destroy()
       @view = null
     else
-      {scopeName} = editor.getGrammar()
-      provider = @getProviderManager().providerForScopeName(scopeName)
+      provider = @getProviderManager().providerForGrammar(editor.getGrammar())
       return unless provider
       @view = new PreviewView(editor, provider)
       @view.show()

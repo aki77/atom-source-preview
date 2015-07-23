@@ -14,6 +14,7 @@ Source Preview for Atom.
 ## Supported Languages
 
 * CoffeeScript
+* Babel: [source-preview-babel](https://atom.io/packages/source-preview-babel)
 * React(JSX): [source-preview-react](https://atom.io/packages/source-preview-react)
 * React(CJSX): [source-preview-react](https://atom.io/packages/source-preview-react)
 * Jade: [source-preview-jade](https://atom.io/packages/source-preview-jade)

@@ -31,9 +31,13 @@ class ProviderManager
       @builtinProviderRegistration = null
       @builtinProvider = null
 
-  providerForScopeName: (scopeName) ->
+  providerForGrammar: ({name, scopeName}) ->
+    for provider in @providers
+      return provider if provider.fromGrammarName is name
+
     for provider in @providers
       return provider if provider.fromScopeName is scopeName
+
     null
 
   isProviderRegistered: (provider) ->

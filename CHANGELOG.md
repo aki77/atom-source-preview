@@ -1,3 +1,6 @@
+## 0.2.3
+* Refactor
+
 ## 0.2.2
 * Add filePath options
 
