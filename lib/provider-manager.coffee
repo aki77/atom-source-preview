@@ -1,7 +1,6 @@
 {CompositeDisposable, Disposable} = require 'atom'
 CoffeeProvider = null
 
-
 module.exports =
 class ProviderManager
   providers: null

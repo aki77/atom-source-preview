@@ -97,13 +97,28 @@ class PreviewView
       })
 
   show: ->
-    editorPane = atom.workspace.getActivePane()
-    @pane = editorPane.splitRight(items: [@previewEditor])
-    # restore focus
-    editorPane.activate()
+    srcPane = atom.workspace.getActivePane()
 
+    if pane = @getAdjacentPane()
+      pane.activateItem(@previewEditor)
+    else
+      @pane = srcPane.splitRight(items: [@previewEditor])
+
+    srcPane.activate()
     editorElement = atom.views.getView(@previewEditor)
     atom.commands.add(editorElement, 'source-preview:toggle', @destroy)
+
+  getAdjacentPane: ->
+    pane = atom.workspace.getActivePane()
+    return unless children = pane.getParent().getChildren?()
+    index = children.indexOf pane
+    console.log 'children', children, index
+
+    _.chain([children[index-1], children[index+1]])
+      .filter (pane) ->
+        pane?.constructor?.name is 'Pane'
+      .last()
+      .value()
 
   recenterTopBottom: (editor) ->
     editorElement = atom.views.getView(editor)

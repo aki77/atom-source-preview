@@ -1,3 +1,6 @@
+## 0.3.0
+* Open preview in adjacent pane(Inspired by [project-find-navigation](https://atom.io/packages/project-find-navigation))
+
 ## 0.2.3
 * Refactor
 
