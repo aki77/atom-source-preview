@@ -9,6 +9,7 @@ class CoffeeProvider
     coffee ?= require 'coffee-script'
     options =
       sourceMap: sourceMap ? false
+      bare: true
     result = coffee.compile(code, options)
 
     unless options.sourceMap
