@@ -84,6 +84,7 @@ class PreviewView
     try
       options =
         sourceMap: atom.config.get('source-preview.enableSyncScroll')
+        bare: atom.config.get('source-preview.coffeeProviderOptionBare')
         filePath: @editor.getPath()
 
       {code, sourceMap} = @provider.transform(@editor.getText(), options)

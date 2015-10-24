@@ -19,6 +19,11 @@ module.exports =
       order: 3
       type: 'integer'
       default: 200
+    coffeeProviderOptionBare:
+      order: 4
+      description: "Avoid wrapping function in compiled module source (just like coffee -c --bare [source])"
+      type: 'boolean'
+      default: false
 
 
   activate: (state) ->
