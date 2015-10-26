@@ -1,3 +1,6 @@
+## 0.3.1
+* coffee-provider: make bare a plugin option(@davibe)
+
 ## 0.3.0
 * Open preview in adjacent pane(Inspired by [project-find-navigation](https://atom.io/packages/project-find-navigation))
 
