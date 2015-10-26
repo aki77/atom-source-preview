@@ -12,6 +12,7 @@ describe "CoffeePreview", ->
 
     atom.config.set('source-preview.enableSyncScroll', true)
     atom.config.set('source-preview.enableBuiltinProvider', true)
+    atom.config.set('source-preview.coffeeProviderOptionBare', false)
     atom.config.set('source-preview.RefreshDebouncePeriod', 200)
 
     activationPromise = atom.packages.activatePackage('source-preview').then((pack) ->

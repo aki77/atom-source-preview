@@ -5,10 +5,11 @@ class CoffeeProvider
   fromScopeName: 'source.coffee'
   toScopeName: 'source.js'
 
-  transform: (code, {sourceMap} = {}) ->
+  transform: (code, {sourceMap, bare} = {}) ->
     coffee ?= require 'coffee-script'
     options =
       sourceMap: sourceMap ? false
+      bare: bare ? false
     result = coffee.compile(code, options)
 
     unless options.sourceMap
