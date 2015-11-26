@@ -1,3 +1,6 @@
+## 0.3.2
+* Fix deprecated calls
+
 ## 0.3.1
 * coffee-provider: make bare a plugin option(@davibe)
 

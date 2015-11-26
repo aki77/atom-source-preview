@@ -1,13 +1,13 @@
 _ = require 'underscore'
 {SourceMapConsumer} = require 'source-map'
-{CompositeDisposable, TextEditor} = require 'atom'
+{CompositeDisposable} = require 'atom'
 
 module.exports =
 class PreviewView
   alive: true
 
   constructor: (@editor, @provider) ->
-    @previewEditor = new TextEditor
+    @previewEditor = atom.workspace.buildTextEditor()
     grammar = atom.grammars.grammarForScopeName(@provider.toScopeName)
     @previewEditor.setGrammar(grammar) if grammar
     @previewEditor.getTitle = -> 'Source Preview'
@@ -127,4 +127,4 @@ class PreviewView
     maxRow = Math.max((c.getBufferRow() for c in editor.getCursors())...)
     minOffset = editorElement.pixelPositionForBufferPosition([minRow, 0])
     maxOffset = editorElement.pixelPositionForBufferPosition([maxRow, 0])
-    editor.setScrollTop((minOffset.top + maxOffset.top - editor.getHeight())/2)
+    editorElement.setScrollTop((minOffset.top + maxOffset.top - editorElement.getHeight())/2)
