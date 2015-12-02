@@ -57,6 +57,7 @@ class PreviewView
 
   syncScroll: =>
     return unless atom.config.get('source-preview.enableSyncScroll')
+    return unless @editor?
 
     bufferRow = @editor.getCursorBufferPosition().row
     previewRow = @generatedRowFor()

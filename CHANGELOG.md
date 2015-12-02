@@ -1,3 +1,6 @@
+## 0.3.3
+* Fix #3
+
 ## 0.3.2
 * Fix deprecated calls
 
