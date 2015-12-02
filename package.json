@@ -1,7 +1,7 @@
 {
   "name": "source-preview",
   "main": "./lib/main",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Source Preview for Atom",
   "keywords": [
     "coffeescript",
