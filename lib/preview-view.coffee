@@ -82,21 +82,24 @@ class PreviewView
     @errorNotification?.dismiss()
     @errorNotification = null
 
-    try
-      options =
-        sourceMap: atom.config.get('source-preview.enableSyncScroll')
-        bare: atom.config.get('source-preview.coffeeProviderOptionBare')
-        filePath: @editor.getPath()
+    options =
+      sourceMap: atom.config.get('source-preview.enableSyncScroll')
+      bare: atom.config.get('source-preview.coffeeProviderOptionBare')
+      filePath: @editor.getPath()
 
-      {code, sourceMap} = @provider.transform(@editor.getText(), options)
+    new Promise((resolve, reject) =>
+      result = @provider.transform(@editor.getText(), options)
+      resolve(result)
+    ).then(({code, sourceMap}) =>
       @previewEditor.setText(code)
       @sourceMap = new SourceMapConsumer(sourceMap) if sourceMap
       @debouncedSyncScroll()
-    catch error
+    ).catch((error) =>
       @errorNotification = atom.notifications.addError('source-preview compile error', {
         dismissable: true
         detail: error.toString()
       })
+    )
 
   show: ->
     srcPane = atom.workspace.getActivePane()
@@ -114,7 +117,6 @@ class PreviewView
     pane = atom.workspace.getActivePane()
     return unless children = pane.getParent().getChildren?()
     index = children.indexOf pane
-    console.log 'children', children, index
 
     _.chain([children[index-1], children[index+1]])
       .filter (pane) ->

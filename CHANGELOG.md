@@ -1,3 +1,6 @@
+## 0.4.0
+* Support promise(#8)
+
 ## 0.3.4
 * source-map@0.5.3
 
