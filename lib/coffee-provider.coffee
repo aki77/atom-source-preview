@@ -5,15 +5,14 @@ class CoffeeProvider
   fromScopeName: 'source.coffee'
   toScopeName: 'source.js'
 
-  transform: (code, {sourceMap, bare} = {}) ->
+  transform: (code, {sourceMap} = {}) ->
     coffee ?= require 'coffee-script'
     options =
       sourceMap: sourceMap ? false
-      bare: bare ? false
-    result = coffee.compile(code, options)
+      bare: atom.config.get('source-preview.coffeeProviderOptionBare')
 
-    unless options.sourceMap
-      result = {js: result}
+    result = coffee.compile(code, options)
+    result = {js: result} unless options.sourceMap
 
     {
       code: result.js

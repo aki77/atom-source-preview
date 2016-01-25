@@ -1,3 +1,6 @@
+## 0.4.1
+* Refactor
+
 ## 0.4.0
 * Support promise(#8)
 

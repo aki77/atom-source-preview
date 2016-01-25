@@ -84,7 +84,6 @@ class PreviewView
 
     options =
       sourceMap: atom.config.get('source-preview.enableSyncScroll')
-      bare: atom.config.get('source-preview.coffeeProviderOptionBare')
       filePath: @editor.getPath()
 
     new Promise((resolve, reject) =>
