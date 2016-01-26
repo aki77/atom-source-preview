@@ -11,6 +11,8 @@ class PreviewView
     grammar = atom.grammars.grammarForScopeName(@provider.toScopeName)
     @previewEditor.setGrammar(grammar) if grammar
     @previewEditor.getTitle = -> 'Source Preview'
+    # suppress prompt
+    @previewEditor.isModified = -> false
 
     @subscriptions = new CompositeDisposable
     @subscriptions.add(atom.config.observe('source-preview.RefreshDebouncePeriod', (wait) =>
