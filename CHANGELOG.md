@@ -1,3 +1,7 @@
+## 0.5.0
+* Update engines
+* Move config schema to package.json
+
 ## 0.4.2
 * Fix #7
 

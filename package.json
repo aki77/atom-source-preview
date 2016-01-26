@@ -15,7 +15,7 @@
   "repository": "https://github.com/aki77/atom-source-preview",
   "license": "MIT",
   "engines": {
-    "atom": ">=1.0.0 <2.0.0"
+    "atom": ">=1.4.0 <2.0.0"
   },
   "dependencies": {
     "coffee-script": "^1.9.3",
@@ -27,6 +27,29 @@
       "versions": {
         "0.1.0": "consumeProvider"
       }
+    }
+  },
+  "configSchema": {
+    "enableBuiltinProvider": {
+      "order": 1,
+      "type": "boolean",
+      "default": true
+    },
+    "enableSyncScroll": {
+      "order": 2,
+      "type": "boolean",
+      "default": true
+    },
+    "RefreshDebouncePeriod": {
+      "order": 3,
+      "type": "integer",
+      "default": 200
+    },
+    "coffeeProviderOptionBare": {
+      "order": 4,
+      "description": "Avoid wrapping function in compiled module source (just like coffee -c --bare [source])",
+      "type": "boolean",
+      "default": false
     }
   }
 }

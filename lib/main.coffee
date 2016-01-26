@@ -6,26 +6,6 @@ module.exports =
   view: null
   subscriptions: null
 
-  config:
-    enableBuiltinProvider:
-      order: 1
-      type: 'boolean'
-      default: true
-    enableSyncScroll:
-      order: 2
-      type: 'boolean'
-      default: true
-    RefreshDebouncePeriod:
-      order: 3
-      type: 'integer'
-      default: 200
-    coffeeProviderOptionBare:
-      order: 4
-      description: "Avoid wrapping function in compiled module source (just like coffee -c --bare [source])"
-      type: 'boolean'
-      default: false
-
-
   activate: (state) ->
     @views = new WeakMap
     @subscriptions = new CompositeDisposable
