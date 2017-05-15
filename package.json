@@ -18,7 +18,7 @@
     "atom": ">=1.4.0 <2.0.0"
   },
   "dependencies": {
-    "coffee-script": "^1.9.3",
+    "coffee-script": "^1.12.6",
     "source-map": "^0.5.3",
     "underscore": "^1.8.3"
   },
