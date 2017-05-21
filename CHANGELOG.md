@@ -1,3 +1,6 @@
+## 0.5.1
+* Fix deprecated
+
 ## 0.5.0
 * Update engines
 * Move config schema to package.json

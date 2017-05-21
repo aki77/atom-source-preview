@@ -7,7 +7,7 @@ class PreviewView
   alive: true
 
   constructor: (@editor, @provider) ->
-    @previewEditor = atom.workspace.buildTextEditor()
+    @previewEditor = atom.workspace.buildTextEditor(autoHeight: true)
     grammar = atom.grammars.grammarForScopeName(@provider.toScopeName)
     @previewEditor.setGrammar(grammar) if grammar
     @previewEditor.getTitle = -> 'Source Preview'
