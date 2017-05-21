@@ -1,5 +1,6 @@
 ## 0.5.1
 * Fix deprecated
+* coffee-script@1.12.6
 
 ## 0.5.0
 * Update engines
