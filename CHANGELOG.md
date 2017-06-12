@@ -1,6 +1,7 @@
 ## 0.5.2
 * Update README
 * Refactor
+* Fix height bug
 
 ## 0.5.1
 * Fix deprecated
