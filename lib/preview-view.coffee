@@ -27,9 +27,8 @@ class PreviewView
   destroy: =>
     return unless @isAlive()
     @alive = false
-    @pane?.destroyItem(@previewEditor)
-    @pane?.destroy()
-    @pane = null
+    pane = atom.workspace.paneForItem(@previewEditor)
+    pane?.destroyItem(@previewEditor)
     @previewEditor?.destroy()
     @previewEditor = null
     @sourceMap = null
@@ -104,26 +103,25 @@ class PreviewView
 
   show: ->
     srcPane = atom.workspace.getActivePane()
+    pane = @getAdjacentPane()
 
-    if pane = @getAdjacentPane()
+    if pane?
       pane.activateItem(@previewEditor)
     else
-      @pane = srcPane.splitRight(items: [@previewEditor])
+      srcPane.splitRight(items: [@previewEditor])
 
     srcPane.activate()
     editorElement = atom.views.getView(@previewEditor)
     atom.commands.add(editorElement, 'source-preview:toggle', @destroy)
 
   getAdjacentPane: ->
-    pane = atom.workspace.getActivePane()
-    return unless children = pane.getParent().getChildren?()
-    index = children.indexOf pane
+    activePane = atom.workspace.getActivePane()
+    return unless children = activePane.getParent().getChildren?()
+    index = children.indexOf activePane
 
-    _.chain([children[index-1], children[index+1]])
-      .filter (pane) ->
-        pane?.constructor?.name is 'Pane'
-      .last()
-      .value()
+    [children[index + 1], children[index - 1]].find((pane) ->
+      pane?.constructor?.name == 'Pane'
+    )
 
   recenterTopBottom: (editor) ->
     editorElement = atom.views.getView(editor)

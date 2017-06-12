@@ -1,3 +1,7 @@
+## 0.5.2
+* Update README
+* Refactor
+
 ## 0.5.1
 * Fix deprecated
 * coffee-script@1.12.6
