@@ -10,7 +10,7 @@ module.exports =
     @views = new WeakMap
     @subscriptions = new CompositeDisposable
     @subscriptions.add(atom.commands.add('atom-text-editor[data-grammar~="source"]',
-      'source-preview:toggle': ({target}) => @toggle(target?.getModel?())
+      'source-preview:toggle': ({currentTarget}) => @toggle(currentTarget?.getModel?())
     ))
 
   deactivate: ->

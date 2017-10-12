@@ -1,3 +1,6 @@
+## 0.5.3
+* Fix #24
+
 ## 0.5.2
 * Update README
 * Refactor
